@@ -1,4 +1,4 @@
-# DSC: .NET aEnvironment Setup with Winget
+# DSC: .NET Environment Setup with Winget
 
 This project provides configurations for setting up .NET  development environments using [winget](https://learn.microsoft.com/en-us/windows/package-manager/winget/) on Windows.
 
