@@ -1,0 +1,270 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+properties:
+  configurationVersion: 0.2.0
+  ########################################
+  ### ASSERTIONS: System Requirements
+  ########################################
+  assertions:
+    ### Assertion: OS Version
+    ### -------------------------------------
+    - resource: Microsoft.Windows.Developer/OsVersion
+      id: OsVersion
+      directives:
+        description: Minimum OS version requirement
+        allowPrerelease: true
+      settings:
+        MinVersion: "10.0.22000"
+    ### Clone ComputerInstallation repository
+    ### -------------------------------------
+    - resource: GitDsc/GitClone
+      id: mydotfiles
+      dependsOn:
+        - git
+        - devdrive
+      directives:
+        description: Clone WinGet CLI GitHub repository
+        allowPrerelease: true
+      settings:
+        HttpsUrl: https://github.com/vojat/ComputerInstallation
+        RootDirectory: F:\Source\Voja
+        Ensure: Present
+    ########################################
+    ### Install CLIs, SDKs & Tools
+    ### Install Powershell
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Powershell 7
+        allowPrerelease: true
+      settings:
+        id: Microsoft.PowerShell
+    ### Install OMP
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: OMP
+      directives:
+        description: Install Oh My Posh
+        allowPrerelease: true
+      settings:
+        id: JanDeDobbeleer.OhMyPosh
+    ### Install Azure CLI
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: azurecli
+      directives:
+        description: Install Azure CLI
+        allowPrerelease: true
+      settings:
+       id:  Microsoft.AzureCLI
+    ### Install Azd
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Azd
+        allowPrerelease: true
+      settings:
+        id: Microsoft.Azd
+    ### Install Visual Studio Code
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: vscode
+      directives:
+        description: Install Microsoft Visual Studio Code
+        allowPrerelease: true
+      settings:
+        id: Microsoft.VisualStudioCode
+        ensure: Present
+    ### Install Visual Sudio
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: vside
+      directives:
+       description: Install latest Visual Studio Enterprise
+       allowPrerelease: true
+      settings:
+        id: Microsoft.VisualStudio.Enterprise
+    ### Install VS Workloads
+    ### -------------------------------------
+    - resource: Microsoft.VisualStudio.DSC/VSComponents
+      id: vs2026Workloads
+      dependsOn:
+        - vside
+      directives:
+        description: Install required VS 2026 workloads
+        allowPrerelease: true
+        securityContext: elevated
+      settings:
+        # Produkt + kanal för VS 2026 Enterprise
+        productId: Microsoft.VisualStudio.Product.Enterprise
+        channelId: VisualStudio.18.Insiders   # eller VisualStudio.18.Stable om du kör den kanalen :contentReference[oaicite:2]{index=2}
+        includeRecommended: true
+        allowUnsignedExtensions: true
+        # VÄLJ workloads/components här:
+        components:
+          - Microsoft.VisualStudio.Workload.ManagedDesktop
+          - Microsoft.VisualStudio.Workload.NetWeb
+          # lägg till fler workload-/component-ID:n vid behov
+    ### Install Windows Terminal
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install windows terminal
+        allowPrerelease: true
+      settings:
+        id: Microsoft.WindowsTerminal
+        source: winget
+
+    ### Install VS Code Extensions
+    ### -------------------------------------
+    - resource: PSDscResources/Script
+      id: vscodeextensions
+      dependsOn:
+        - vscode
+      directives:
+        description: Install Extension for VS Code
+      settings:
+        SetScript: |
+          $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") 
+          code --install-extension azureadb2ctools.aadb2c
+          code --install-extension devcenter.ms-devbox
+          code --install-extension durablefunctionsmonitor.durablefunctionsmonitor
+          code --install-extension eamodio.gitlens
+          code --install-extension github.copilot
+          code --install-extension humao.rest-client
+          code --install-extension ms-azuretools.azure-dev
+          code --install-extension ms-azuretools.vscode-apimanagement
+          code --install-extension ms-azuretools.vscode-azurefunctions
+          code --install-extension ms-azuretools.vscode-azurestaticwebapps
+          code --install-extension ms-azuretools.vscode-azurestorage
+          code --install-extension ms-azuretools.vscode-bicep
+          code --install-extension ms-azuretools.vscode-docker
+          code --install-extension ms-dotnettools.csdevkit
+          code --install-extension ms-dotnettools.csharp
+          code --install-extension ms-dotnettools.vscodeintellicode-csharp
+          code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
+          code --install-extension ms-mssql.mssql
+          code --install-extension ms-python.vscode-pylance
+          code --install-extension ms-vscode-remote.vscode-remote-extensionpack
+          code --install-extension ms-vscode.azure-account
+          code --install-extension ms-vscode.powershell
+          code --install-extension ms-vsliveshare.vsliveshare
+          code --install-extension msazurermtools.azurerm-vscode-tools
+          code --install-extension ritwickdey.LiveServer
+        GetScript: return $false
+        TestScript: return $false
+    ### Install Slack 
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Slack
+        allowPrerelease: true
+      settings:
+        id: SlackTechnologies.Slack
+        source: winget
+    ### Install Docker Desktop
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Docker
+        allowPrerelease: true
+      settings:
+        id: Docker.DockerDesktop
+        source: winget    
+    ### Install Postman
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: install Postman
+        allowPrerelease: true
+      settings:
+        id: Postman.Postman
+        source: winget
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: install Insomnia
+        allowPrerelease: true
+      settings:
+        id: Insomnia.Insomnia
+        source: winget
+    ### Install LinqPad 7
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install LinqPad 7
+        allowPrerelease: true
+      settings:
+        id: LINQPad.LINQPad.7
+        source: winget
+    ### Install Fiddler Everywhere
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Fiddler Everywhere
+        allowPrerelease: true
+      settings:
+        id: Telerik.Fiddler.Everywhere
+        source: winget
+    ### Install Azure Storage Explorer
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Azure Storage Explorer
+        allowPrerelease: true
+      settings:
+        id: Microsoft.Azure.StorageExplorer
+        source: winget
+    ### Install Spotify
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Spotify
+        allowPrerelease: true
+      settings:
+        id: Spotify.Spotify
+        source: winget
+    ### Install WinMerge
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install WinMerge
+        allowPrerelease: true
+      settings:
+        id: WinMerge.WinMerge
+        source: winget
+    ### Install Logitech G Hub
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Logitech.GHUB
+        allowPrerelease: true
+      settings:
+        id: Logitech.GHUB
+        source: winget
+    ### Install WinDirStat
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install WinDirStat
+        allowPrerelease: true
+      settings:
+        id: WinDirStat.WinDirStat
+        source: winget
+    ### Install PuTTY
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install PuTTY
+        allowPrerelease: true
+      settings:
+        id: PuTTY.PuTTY
+        source: winget
+    ### Install GitKraken
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install GitKraken
+        allowPrerelease: true
+      settings:
+        id: Axosoft.GitKraken
+        source: winget
