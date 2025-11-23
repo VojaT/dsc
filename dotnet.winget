@@ -102,161 +102,161 @@ properties:
     - resource: Microsoft.VSCode.Dsc/VSCodeExtension
       id: VSCodeExtension - azureadb2ctools.aadb2c
       directives:
-        description: Install GitLens for enhanced Git integration
+        description: Install Azure AD B2C extension
         allowPrerelease: true
       settings:
         Name: azureadb2ctools.aadb2c
     - resource: Microsoft.VSCode.Dsc/VSCodeExtension
       id: VSCodeExtension - devcenter.ms-devbox
       directives:
-        description: Install GitLens for enhanced Git integration
+        description: Install Microsoft Dev Box extension
         allowPrerelease: true
       settings:
         Name: devcenter.ms-devbox
     - resource: Microsoft.VSCode.Dsc/VSCodeExtension
       id: VSCodeExtension - durablefunctionsmonitor.durablefunctionsmonitor
       directives:
-        description: Install GitLens for enhanced Git integration
+        description: Install Durable Functions Monitor extension
         allowPrerelease: true
       settings:
         Name: durablefunctionsmonitor.durablefunctionsmonitor
     - resource: Microsoft.VSCode.Dsc/VSCodeExtension
       id: VSCodeExtension - eamodio.gitlens
       directives:
-        description: Install GitLens for enhanced Git integration
+        description: Install GitLens — Git supercharged 
         allowPrerelease: true
       settings:
         Name: eamodio.gitlens
     - resource: Microsoft.VSCode.Dsc/VSCodeExtension
       id: VSCodeExtension - github.copilot
       directives:
-        description: Install GitLens for enhanced Git integration
+        description: Install GitHub Copilot integration
         allowPrerelease: true
       settings:
         Name: github.copilot
     - resource: Microsoft.VSCode.Dsc/VSCodeExtension
       id: VSCodeExtension - humao.rest-client
       directives:
-        description: Install GitLens for enhanced Git integration
+        description: Install REST Client extension
         allowPrerelease: true
       settings:
         Name: humao.rest-client
     - resource: Microsoft.VSCode.Dsc/VSCodeExtension
       id: VSCodeExtension - ms-azuretools.azure-dev
       directives:
-        description: Install GitLens for enhanced Git integration
+        description: Install Azure Developer CLI extension 
         allowPrerelease: true
       settings:
         Name: ms-azuretools.azure-dev
     - resource: Microsoft.VSCode.Dsc/VSCodeExtension
       id: VSCodeExtension - ms-azuretools.vscode-apimanagement
       directives:
-        description: Install GitLens for enhanced Git integration
+        description: Install Azure API Management Extension
         allowPrerelease: true
       settings:
         Name: ms-azuretools.vscode-apimanagement
     - resource: Microsoft.VSCode.Dsc/VSCodeExtension
       id: VSCodeExtension - ms-azuretools.vscode-azurefunctions
       directives:
-        description: Install GitLens for enhanced Git integration
+        description: Install Azure Functions Extension
         allowPrerelease: true
       settings:
         Name:  ms-azuretools.vscode-azurefunctions
     - resource: Microsoft.VSCode.Dsc/VSCodeExtension
       id: VSCodeExtension - ms-azuretools.vscode-azurestaticwebapps
       directives:
-        description: Install GitLens for enhanced Git integration
+        description: Install Azure Static Web Apps Extension
         allowPrerelease: true
       settings:
         Name: ms-azuretools.vscode-azurestaticwebapps
     - resource: Microsoft.VSCode.Dsc/VSCodeExtension
       id: VSCodeExtension - ms-azuretools.vscode-azurestorage
       directives:
-        description: Install GitLens for enhanced Git integration
+        description: Install Azure Storage Extension
         allowPrerelease: true
       settings:
         Name: ms-azuretools.vscode-azurestorage
     - resource: Microsoft.VSCode.Dsc/VSCodeExtension
       id: VSCodeExtension - ms-azuretools.vscode-bicep
       directives:
-        description: Install GitLens for enhanced Git integration
+        description: Install Azure ARM/Bicep extension
         allowPrerelease: true
       settings:
         Name: ms-azuretools.vscode-bicep
     - resource: Microsoft.VSCode.Dsc/VSCodeExtension
       id: VSCodeExtension - ms-azuretools.vscode-docker
       directives:
-        description: Install GitLens for enhanced Git integration
+        description: Install Docker extension
         allowPrerelease: true
       settings:
         Name: ms-azuretools.vscode-docker
     - resource: Microsoft.VSCode.Dsc/VSCodeExtension
       id: VSCodeExtension - ms-dotnettools.csdevkit
       directives:
-        description: Install GitLens for enhanced Git integration
+        description: Install C# Dev Kit extension
         allowPrerelease: true
       settings:
         Name: ms-dotnettools.csdevkit
     - resource: Microsoft.VSCode.Dsc/VSCodeExtension
       id: VSCodeExtension - ms-dotnettools.csharp
       directives:
-        description: Install GitLens for enhanced Git integration
+        description: Install C# extension
         allowPrerelease: true
       settings:
         Name: ms-dotnettools.csharp
     - resource: Microsoft.VSCode.Dsc/VSCodeExtension
       id: VSCodeExtension - ms-dotnettools.vscodeintellicode-csharp
       directives:
-        description: Install GitLens for enhanced Git integration
+        description: Install IntelliCode for C# extension
         allowPrerelease: true
       settings:
         Name: ms-dotnettools.vscodeintellicode-csharp
     - resource: Microsoft.VSCode.Dsc/VSCodeExtension
       id: VSCodeExtension - ms-kubernetes-tools.vscode-kubernetes-tools
       directives:
-        description: Install GitLens for enhanced Git integration
+        description: Install Kubernetes extension
         allowPrerelease: true
       settings:
         Name: ms-kubernetes-tools.vscode-kubernetes-tools
     - resource: Microsoft.VSCode.Dsc/VSCodeExtension
       id: VSCodeExtension - ms-mssql.mssql
       directives:
-        description: Install GitLens for enhanced Git integration
+        description: Install SQL Server (mssql) extension
         allowPrerelease: true
       settings:
         Name: ms-mssql.mssql
     - resource: Microsoft.VSCode.Dsc/VSCodeExtension
       id: VSCodeExtension - ms-python.vscode-pylance
       directives:
-        description: Install GitLens for enhanced Git integration
+        description: Install Pylance extension
         allowPrerelease: true
       settings:
         Name: ms-python.vscode-pylance
     - resource: Microsoft.VSCode.Dsc/VSCodeExtension
       id: VSCodeExtension - ms-vscode-remote.vscode-remote-extensionpack
       directives:
-        description: Install GitLens for enhanced Git integration
+        description: Install Remote Development extension pack
         allowPrerelease: true
       settings:
         Name: ms-vscode-remote.vscode-remote-extensionpack
     - resource: Microsoft.VSCode.Dsc/VSCodeExtension
       id: VSCodeExtension - ms-vscode.powershell
       directives:
-        description: Install GitLens for enhanced Git integration
+        description: Install PowerShell extension
         allowPrerelease: true
       settings:
         Name: ms-vscode.powershell
     - resource: Microsoft.VSCode.Dsc/VSCodeExtension
       id: VSCodeExtension - ms-vsliveshare.vsliveshare
       directives:
-        description: Install GitLens for enhanced Git integration
+        description: Install Live Share extension
         allowPrerelease: true
       settings:
         Name: ms-vsliveshare.vsliveshare
     - resource: Microsoft.VSCode.Dsc/VSCodeExtension
       id: VSCodeExtension - ritwickdey.LiveServer
       directives:
-        description: Install GitLens for enhanced Git integration
+        description: Install Live Server extension
         allowPrerelease: true
       settings:
         Name: ritwickdey.LiveServer
