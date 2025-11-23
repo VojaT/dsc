@@ -260,62 +260,6 @@ properties:
         allowPrerelease: true
       settings:
         Name: ritwickdey.LiveServer
-#    ### Install Visual Studio Code
-#    ### -------------------------------------
-#    - resource: Microsoft.WinGet.DSC/WinGetPackage
-#      id: vscode
-#      directives:
-#        description: Install Microsoft Visual Studio Code
-#        allowPrerelease: true
-#      settings:
-#        id: Microsoft.VisualStudioCode
-#        ensure: Present
-#    ### Install VS Code Extensions
-#    ### -------------------------------------
-#    - resource: PSDscResources/Script
-#      id: vscodeextensions
-#      dependsOn:
-#        - vscode
-#      directives:
-#        description: Install Extension for VS Code
-#      settings:
-#        SetScript: |
-#          $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") 
-#          code --install-extension azureadb2ctools.aadb2c
-#          code --install-extension devcenter.ms-devbox
-#          code --install-extension durablefunctionsmonitor.durablefunctionsmonitor
-#          code --install-extension eamodio.gitlens
-#          code --install-extension github.copilot
-#          code --install-extension humao.rest-client
-#          code --install-extension ms-azuretools.azure-dev
-#          code --install-extension ms-azuretools.vscode-apimanagement
-#          code --install-extension ms-azuretools.vscode-azurefunctions
-#          code --install-extension ms-azuretools.vscode-azurestaticwebapps
-#          code --install-extension ms-azuretools.vscode-azurestorage
-#          code --install-extension ms-azuretools.vscode-bicep
-#          code --install-extension ms-azuretools.vscode-docker
-#          code --install-extension ms-dotnettools.csdevkit
-#          code --install-extension ms-dotnettools.csharp
-#          code --install-extension ms-dotnettools.vscodeintellicode-csharp
-#          code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
-#          code --install-extension ms-mssql.mssql
-#          code --install-extension ms-python.vscode-pylance
-#          code --install-extension ms-vscode-remote.vscode-remote-extensionpack
-#          code --install-extension ms-vscode.powershell
-#          code --install-extension ms-vsliveshare.vsliveshare
-#          code --install-extension ritwickdey.LiveServer
-#        GetScript: return $false
-#        TestScript: return $false
-    ### Install Slack 
-    ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: Slack
-      directives:
-        description: Install Slack
-        allowPrerelease: true
-      settings:
-        id: SlackTechnologies.Slack
-        source: winget
     ### Install Docker Desktop
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
@@ -376,16 +320,6 @@ properties:
       settings:
         id: Microsoft.Azure.StorageExplorer
         source: winget
-    ### Install Spotify
-    ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: Spotify
-      directives:
-        description: Install Spotify
-        allowPrerelease: true
-      settings:
-        id: Spotify.Spotify
-        source: winget
     ### Install WinMerge
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
@@ -395,26 +329,6 @@ properties:
         allowPrerelease: true
       settings:
         id: WinMerge.WinMerge
-        source: winget
-    ### Install Logitech G Hub
-    ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: LogitechGHub
-      directives:
-        description: Install Logitech.GHUB
-        allowPrerelease: true
-      settings:
-        id: Logitech.GHUB
-        source: winget
-    ### Install WinDirStat
-    ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: WinDirStat
-      directives:
-        description: Install WinDirStat
-        allowPrerelease: true
-      settings:
-        id: WinDirStat.WinDirStat
         source: winget
     ### Install PuTTY
     ### -------------------------------------

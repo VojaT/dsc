@@ -61,12 +61,22 @@ winget configure -f dotnet.winget
 ```
 > **dotnet.winget**: Contains a [winget configuration](https://learn.microsoft.com/en-us/windows/package-manager/configuration/) for installing and configuring .NET, Visual Studio, Azure CLI, Node.js, and related tools.
 
+### Helpful windows apps
+Run the following command to install some helpfull windows apps  like Spotify, Slack, etc
+This needs to be  run in a non-administrator prompt (slack won't install otherwise)
+
+```powershell
+winget configure -f apps.winget
+```
+> **apps.winget**: Contains a [winget configuration](https://learn.microsoft.com/en-us/windows/package-manager/configuration/) for installing and configuring Slack, Spotify, and simular apps.
+
+
 ## Usage
 - To re-apply or update a configuration, simply run the install command again for the desired environment.
 - You can edit the `.winget` files to include additional packages or settings.
 
 ## Troubleshooting
-- Ensure you are running the console as an administrator.
+- Ensure you are running the console as an administrator (not for **apps.winget**).
 - If you encounter issues with winget, check for updates or reinstall from the official link above.
 - For more help, see the [winget documentation](https://learn.microsoft.com/en-us/windows/package-manager/winget/).
 
