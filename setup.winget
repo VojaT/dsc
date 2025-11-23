@@ -151,13 +151,23 @@ properties:
         id: 7zip.7zip
         source: winget
     ### Install ExpressVPN
+    # ### -------------------------------------
+    # - resource: Microsoft.WinGet.DSC/WinGetPackage
+    #   directives:
+    #     description: Install ExpressVPN
+    #     allowPrerelease: true
+    #   settings:
+    #     id: ExpressVPN.ExpressVPN
+    #     source: winget
+    ### Install EarTrumpet
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: NordVPN
       directives:
-        description: Install ExpressVPN
+        description: Install NordVPN
         allowPrerelease: true
       settings:
-        id: ExpressVPN.ExpressVPN
+        id: NordSecurity.NordVPN
         source: winget
     ### Install EarTrumpet
     ### -------------------------------------
