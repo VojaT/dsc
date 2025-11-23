@@ -1,4 +1,4 @@
-# DSC: .NET and Python Environment Setup with Winget
+# DSC: .NET Environment Setup with Winget
 
 This project provides configurations for setting up .NET  development environments using [winget](https://learn.microsoft.com/en-us/windows/package-manager/winget/) on Windows.
 
@@ -45,7 +45,7 @@ This project provides configurations for setting up .NET  development environmen
    
    For more details, see the [winget settings documentation](https://aka.ms/winget-settings).
 
-### Install coe components
+### Install core components
 Run the following command to apply the core computer components:
 
 ```powershell
