@@ -40,12 +40,13 @@ properties:
         Size: '50Gb'
     ### Enable: Developer Mode
     ### -------------------------------------
-    - resource: Microsoft.Windows.Developer/DeveloperMode
+    - resource: Microsoft.Windows.Settings/WindowsSettings
       directives:
         description: Enable Developer Mode
         allowPrerelease: true
+        securityContext: elevated
       settings:
-        Ensure: Present
+        DeveloperMode: true
      ### Show file extensions and hidden files
      ### -------------------------------------
     - resource: Microsoft.Windows.Developer/WindowsExplorer
@@ -75,7 +76,8 @@ properties:
         allowPrerelease: true
       settings:
         id: Git.Git
-        ########################################
+            
+    ########################################
     ### Configure settings
     ########################################
     ### Git Configure Name
@@ -202,3 +204,12 @@ properties:
       settings:
         id: Microsoft.PowerToys
         source: winget
+    ### Install OMP
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: OMP
+      directives:
+        description: Install Oh My Posh
+        allowPrerelease: true
+      settings:
+        id: JanDeDobbeleer.OhMyPosh

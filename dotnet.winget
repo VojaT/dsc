@@ -14,13 +14,11 @@ properties:
         allowPrerelease: true
       settings:
         MinVersion: "10.0.22000"
+  resources:
     ### Clone ComputerInstallation repository
     ### -------------------------------------
     - resource: GitDsc/GitClone
       id: mydotfiles
-      dependsOn:
-        - git
-        - devdrive
       directives:
         description: Clone WinGet CLI GitHub repository
         allowPrerelease: true
@@ -33,20 +31,12 @@ properties:
     ### Install Powershell
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: powershell7
       directives:
         description: Install Powershell 7
         allowPrerelease: true
       settings:
         id: Microsoft.PowerShell
-    ### Install OMP
-    ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: OMP
-      directives:
-        description: Install Oh My Posh
-        allowPrerelease: true
-      settings:
-        id: JanDeDobbeleer.OhMyPosh
     ### Install Azure CLI
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
@@ -59,102 +49,267 @@ properties:
     ### Install Azd
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: azd
       directives:
         description: Install Azd
         allowPrerelease: true
       settings:
         id: Microsoft.Azd
-    ### Install Visual Studio Code
-    ### -------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: vscode
-      directives:
-        description: Install Microsoft Visual Studio Code
-        allowPrerelease: true
-      settings:
-        id: Microsoft.VisualStudioCode
-        ensure: Present
     ### Install Visual Sudio
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: vside
+      id: VS2026Enterprise
       directives:
-       description: Install latest Visual Studio Enterprise
-       allowPrerelease: true
+        description: Install Visual Studio 2026 Enterprise
+        securityContext: elevated
       settings:
         id: Microsoft.VisualStudio.Enterprise
-    ### Install VS Workloads
-    ### -------------------------------------
+        source: winget
     - resource: Microsoft.VisualStudio.DSC/VSComponents
-      id: vs2026Workloads
+      id: Default Workloads 
       dependsOn:
-        - vside
+        - VS2026Enterprise
       directives:
-        description: Install required VS 2026 workloads
+        description: Install required VS Workloads 
         allowPrerelease: true
         securityContext: elevated
       settings:
-        # Produkt + kanal för VS 2026 Enterprise
         productId: Microsoft.VisualStudio.Product.Enterprise
-        channelId: VisualStudio.18.Insiders   # eller VisualStudio.18.Stable om du kör den kanalen :contentReference[oaicite:2]{index=2}
+        channelId: VisualStudio.18.Stable
         includeRecommended: true
-        allowUnsignedExtensions: true
-        # VÄLJ workloads/components här:
         components:
-          - Microsoft.VisualStudio.Workload.ManagedDesktop
           - Microsoft.VisualStudio.Workload.NetWeb
-          # lägg till fler workload-/component-ID:n vid behov
     ### Install Windows Terminal
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: WindowsTerminal
       directives:
         description: Install windows terminal
         allowPrerelease: true
       settings:
         id: Microsoft.WindowsTerminal
         source: winget
-
-    ### Install VS Code Extensions
-    ### -------------------------------------
-    - resource: PSDscResources/Script
-      id: vscodeextensions
-      dependsOn:
-        - vscode
+#    ### Install Visual Studio Code
+#    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: VSCode
       directives:
-        description: Install Extension for VS Code
+        description: Install Visual Studio Code
+        securityContext: elevated
       settings:
-        SetScript: |
-          $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") 
-          code --install-extension azureadb2ctools.aadb2c
-          code --install-extension devcenter.ms-devbox
-          code --install-extension durablefunctionsmonitor.durablefunctionsmonitor
-          code --install-extension eamodio.gitlens
-          code --install-extension github.copilot
-          code --install-extension humao.rest-client
-          code --install-extension ms-azuretools.azure-dev
-          code --install-extension ms-azuretools.vscode-apimanagement
-          code --install-extension ms-azuretools.vscode-azurefunctions
-          code --install-extension ms-azuretools.vscode-azurestaticwebapps
-          code --install-extension ms-azuretools.vscode-azurestorage
-          code --install-extension ms-azuretools.vscode-bicep
-          code --install-extension ms-azuretools.vscode-docker
-          code --install-extension ms-dotnettools.csdevkit
-          code --install-extension ms-dotnettools.csharp
-          code --install-extension ms-dotnettools.vscodeintellicode-csharp
-          code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
-          code --install-extension ms-mssql.mssql
-          code --install-extension ms-python.vscode-pylance
-          code --install-extension ms-vscode-remote.vscode-remote-extensionpack
-          code --install-extension ms-vscode.azure-account
-          code --install-extension ms-vscode.powershell
-          code --install-extension ms-vsliveshare.vsliveshare
-          code --install-extension msazurermtools.azurerm-vscode-tools
-          code --install-extension ritwickdey.LiveServer
-        GetScript: return $false
-        TestScript: return $false
+        id: Microsoft.VisualStudioCode
+        source: winget
+    - resource: Microsoft.VSCode.Dsc/VSCodeExtension
+      id: VSCodeExtension - azureadb2ctools.aadb2c
+      directives:
+        description: Install GitLens for enhanced Git integration
+        allowPrerelease: true
+      settings:
+        Name: azureadb2ctools.aadb2c
+    - resource: Microsoft.VSCode.Dsc/VSCodeExtension
+      id: VSCodeExtension - devcenter.ms-devbox
+      directives:
+        description: Install GitLens for enhanced Git integration
+        allowPrerelease: true
+      settings:
+        Name: devcenter.ms-devbox
+    - resource: Microsoft.VSCode.Dsc/VSCodeExtension
+      id: VSCodeExtension - durablefunctionsmonitor.durablefunctionsmonitor
+      directives:
+        description: Install GitLens for enhanced Git integration
+        allowPrerelease: true
+      settings:
+        Name: durablefunctionsmonitor.durablefunctionsmonitor
+    - resource: Microsoft.VSCode.Dsc/VSCodeExtension
+      id: VSCodeExtension - eamodio.gitlens
+      directives:
+        description: Install GitLens for enhanced Git integration
+        allowPrerelease: true
+      settings:
+        Name: eamodio.gitlens
+    - resource: Microsoft.VSCode.Dsc/VSCodeExtension
+      id: VSCodeExtension - github.copilot
+      directives:
+        description: Install GitLens for enhanced Git integration
+        allowPrerelease: true
+      settings:
+        Name: github.copilot
+    - resource: Microsoft.VSCode.Dsc/VSCodeExtension
+      id: VSCodeExtension - humao.rest-client
+      directives:
+        description: Install GitLens for enhanced Git integration
+        allowPrerelease: true
+      settings:
+        Name: humao.rest-client
+    - resource: Microsoft.VSCode.Dsc/VSCodeExtension
+      id: VSCodeExtension - ms-azuretools.azure-dev
+      directives:
+        description: Install GitLens for enhanced Git integration
+        allowPrerelease: true
+      settings:
+        Name: ms-azuretools.azure-dev
+    - resource: Microsoft.VSCode.Dsc/VSCodeExtension
+      id: VSCodeExtension - ms-azuretools.vscode-apimanagement
+      directives:
+        description: Install GitLens for enhanced Git integration
+        allowPrerelease: true
+      settings:
+        Name: ms-azuretools.vscode-apimanagement
+    - resource: Microsoft.VSCode.Dsc/VSCodeExtension
+      id: VSCodeExtension - ms-azuretools.vscode-azurefunctions
+      directives:
+        description: Install GitLens for enhanced Git integration
+        allowPrerelease: true
+      settings:
+        Name:  ms-azuretools.vscode-azurefunctions
+    - resource: Microsoft.VSCode.Dsc/VSCodeExtension
+      id: VSCodeExtension - ms-azuretools.vscode-azurestaticwebapps
+      directives:
+        description: Install GitLens for enhanced Git integration
+        allowPrerelease: true
+      settings:
+        Name: ms-azuretools.vscode-azurestaticwebapps
+    - resource: Microsoft.VSCode.Dsc/VSCodeExtension
+      id: VSCodeExtension - ms-azuretools.vscode-azurestorage
+      directives:
+        description: Install GitLens for enhanced Git integration
+        allowPrerelease: true
+      settings:
+        Name: ms-azuretools.vscode-azurestorage
+    - resource: Microsoft.VSCode.Dsc/VSCodeExtension
+      id: VSCodeExtension - ms-azuretools.vscode-bicep
+      directives:
+        description: Install GitLens for enhanced Git integration
+        allowPrerelease: true
+      settings:
+        Name: ms-azuretools.vscode-bicep
+    - resource: Microsoft.VSCode.Dsc/VSCodeExtension
+      id: VSCodeExtension - ms-azuretools.vscode-docker
+      directives:
+        description: Install GitLens for enhanced Git integration
+        allowPrerelease: true
+      settings:
+        Name: ms-azuretools.vscode-docker
+    - resource: Microsoft.VSCode.Dsc/VSCodeExtension
+      id: VSCodeExtension - ms-dotnettools.csdevkit
+      directives:
+        description: Install GitLens for enhanced Git integration
+        allowPrerelease: true
+      settings:
+        Name: ms-dotnettools.csdevkit
+    - resource: Microsoft.VSCode.Dsc/VSCodeExtension
+      id: VSCodeExtension - ms-dotnettools.csharp
+      directives:
+        description: Install GitLens for enhanced Git integration
+        allowPrerelease: true
+      settings:
+        Name: ms-dotnettools.csharp
+    - resource: Microsoft.VSCode.Dsc/VSCodeExtension
+      id: VSCodeExtension - ms-dotnettools.vscodeintellicode-csharp
+      directives:
+        description: Install GitLens for enhanced Git integration
+        allowPrerelease: true
+      settings:
+        Name: ms-dotnettools.vscodeintellicode-csharp
+    - resource: Microsoft.VSCode.Dsc/VSCodeExtension
+      id: VSCodeExtension - ms-kubernetes-tools.vscode-kubernetes-tools
+      directives:
+        description: Install GitLens for enhanced Git integration
+        allowPrerelease: true
+      settings:
+        Name: ms-kubernetes-tools.vscode-kubernetes-tools
+    - resource: Microsoft.VSCode.Dsc/VSCodeExtension
+      id: VSCodeExtension - ms-mssql.mssql
+      directives:
+        description: Install GitLens for enhanced Git integration
+        allowPrerelease: true
+      settings:
+        Name: ms-mssql.mssql
+    - resource: Microsoft.VSCode.Dsc/VSCodeExtension
+      id: VSCodeExtension - ms-python.vscode-pylance
+      directives:
+        description: Install GitLens for enhanced Git integration
+        allowPrerelease: true
+      settings:
+        Name: ms-python.vscode-pylance
+    - resource: Microsoft.VSCode.Dsc/VSCodeExtension
+      id: VSCodeExtension - ms-vscode-remote.vscode-remote-extensionpack
+      directives:
+        description: Install GitLens for enhanced Git integration
+        allowPrerelease: true
+      settings:
+        Name: ms-vscode-remote.vscode-remote-extensionpack
+    - resource: Microsoft.VSCode.Dsc/VSCodeExtension
+      id: VSCodeExtension - ms-vscode.powershell
+      directives:
+        description: Install GitLens for enhanced Git integration
+        allowPrerelease: true
+      settings:
+        Name: ms-vscode.powershell
+    - resource: Microsoft.VSCode.Dsc/VSCodeExtension
+      id: VSCodeExtension - ms-vsliveshare.vsliveshare
+      directives:
+        description: Install GitLens for enhanced Git integration
+        allowPrerelease: true
+      settings:
+        Name: ms-vsliveshare.vsliveshare
+    - resource: Microsoft.VSCode.Dsc/VSCodeExtension
+      id: VSCodeExtension - ritwickdey.LiveServer
+      directives:
+        description: Install GitLens for enhanced Git integration
+        allowPrerelease: true
+      settings:
+        Name: ritwickdey.LiveServer
+#    ### Install Visual Studio Code
+#    ### -------------------------------------
+#    - resource: Microsoft.WinGet.DSC/WinGetPackage
+#      id: vscode
+#      directives:
+#        description: Install Microsoft Visual Studio Code
+#        allowPrerelease: true
+#      settings:
+#        id: Microsoft.VisualStudioCode
+#        ensure: Present
+#    ### Install VS Code Extensions
+#    ### -------------------------------------
+#    - resource: PSDscResources/Script
+#      id: vscodeextensions
+#      dependsOn:
+#        - vscode
+#      directives:
+#        description: Install Extension for VS Code
+#      settings:
+#        SetScript: |
+#          $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") 
+#          code --install-extension azureadb2ctools.aadb2c
+#          code --install-extension devcenter.ms-devbox
+#          code --install-extension durablefunctionsmonitor.durablefunctionsmonitor
+#          code --install-extension eamodio.gitlens
+#          code --install-extension github.copilot
+#          code --install-extension humao.rest-client
+#          code --install-extension ms-azuretools.azure-dev
+#          code --install-extension ms-azuretools.vscode-apimanagement
+#          code --install-extension ms-azuretools.vscode-azurefunctions
+#          code --install-extension ms-azuretools.vscode-azurestaticwebapps
+#          code --install-extension ms-azuretools.vscode-azurestorage
+#          code --install-extension ms-azuretools.vscode-bicep
+#          code --install-extension ms-azuretools.vscode-docker
+#          code --install-extension ms-dotnettools.csdevkit
+#          code --install-extension ms-dotnettools.csharp
+#          code --install-extension ms-dotnettools.vscodeintellicode-csharp
+#          code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
+#          code --install-extension ms-mssql.mssql
+#          code --install-extension ms-python.vscode-pylance
+#          code --install-extension ms-vscode-remote.vscode-remote-extensionpack
+#          code --install-extension ms-vscode.powershell
+#          code --install-extension ms-vsliveshare.vsliveshare
+#          code --install-extension ritwickdey.LiveServer
+#        GetScript: return $false
+#        TestScript: return $false
     ### Install Slack 
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Slack
       directives:
         description: Install Slack
         allowPrerelease: true
@@ -164,6 +319,7 @@ properties:
     ### Install Docker Desktop
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Docker
       directives:
         description: Install Docker
         allowPrerelease: true
@@ -173,14 +329,17 @@ properties:
     ### Install Postman
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Postman
       directives:
         description: install Postman
         allowPrerelease: true
       settings:
         id: Postman.Postman
         source: winget
+    ### Install Insomnia
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Insomnia
       directives:
         description: install Insomnia
         allowPrerelease: true
@@ -190,6 +349,7 @@ properties:
     ### Install LinqPad 7
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Linqpad7
       directives:
         description: Install LinqPad 7
         allowPrerelease: true
@@ -199,6 +359,7 @@ properties:
     ### Install Fiddler Everywhere
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: FiddlerEverywhere
       directives:
         description: Install Fiddler Everywhere
         allowPrerelease: true
@@ -208,6 +369,7 @@ properties:
     ### Install Azure Storage Explorer
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: AzureStorageExplorer
       directives:
         description: Install Azure Storage Explorer
         allowPrerelease: true
@@ -217,6 +379,7 @@ properties:
     ### Install Spotify
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Spotify
       directives:
         description: Install Spotify
         allowPrerelease: true
@@ -226,6 +389,7 @@ properties:
     ### Install WinMerge
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: WinMerge
       directives:
         description: Install WinMerge
         allowPrerelease: true
@@ -235,6 +399,7 @@ properties:
     ### Install Logitech G Hub
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: LogitechGHub
       directives:
         description: Install Logitech.GHUB
         allowPrerelease: true
@@ -244,6 +409,7 @@ properties:
     ### Install WinDirStat
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: WinDirStat
       directives:
         description: Install WinDirStat
         allowPrerelease: true
@@ -253,6 +419,7 @@ properties:
     ### Install PuTTY
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: PuTTY
       directives:
         description: Install PuTTY
         allowPrerelease: true
@@ -262,6 +429,7 @@ properties:
     ### Install GitKraken
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: GitKraken
       directives:
         description: Install GitKraken
         allowPrerelease: true
