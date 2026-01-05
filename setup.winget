@@ -179,6 +179,16 @@ properties:
       settings:
         id: Tailscale.Tailscale
         source: winget
+    ### Install WireGuard
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: WireGuard
+      directives:
+        description: Install NordVPN
+        allowPrerelease: true
+      settings:
+        id: WireGuard.WireGuard
+        source: winget
     ### Install EarTrumpet
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage

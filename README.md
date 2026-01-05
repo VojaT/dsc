@@ -70,6 +70,13 @@ winget configure -f apps.winget
 ```
 > **apps.winget**: Contains a [winget configuration](https://learn.microsoft.com/en-us/windows/package-manager/configuration/) for installing and configuring Slack, Spotify, and simular apps.
 
+## Oh My Posh Configuration
+For detailed instructions on setting up and customizing your prompt with Oh My Posh (installed automatically via `setup.winget`), see the [Oh My Posh Configuration Guide](./oh-my-posh.md).
+
+## Install Z
+```powershell
+Install-Module Z -AllowClobber
+```
 
 ## Usage
 - To re-apply or update a configuration, simply run the install command again for the desired environment.
@@ -90,5 +97,3 @@ winget configure -f apps.winget
 - [winget.run](https://winget.run/)
 - [winstall.app](https://winstall.app/)
 
-## Oh My Posh Configuration
-For detailed instructions on setting up and customizing your prompt with Oh My Posh (installed automatically via `tools.winget`), see the [Oh My Posh Configuration Guide](./oh-my-posh.md).
