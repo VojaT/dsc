@@ -159,7 +159,7 @@ properties:
     #   settings:
     #     id: ExpressVPN.ExpressVPN
     #     source: winget
-    ### Install EarTrumpet
+    ### Install NordVPN
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: NordVPN
@@ -168,6 +168,16 @@ properties:
         allowPrerelease: true
       settings:
         id: NordSecurity.NordVPN
+        source: winget
+    ### Install TailScale
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: TailScale
+      directives:
+        description: Install TailScale
+        allowPrerelease: true
+      settings:
+        id: Tailscale.Tailscale
         source: winget
     ### Install EarTrumpet
     ### -------------------------------------

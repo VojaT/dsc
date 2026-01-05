@@ -205,13 +205,6 @@ properties:
       settings:
         Name: ms-dotnettools.csharp
     - resource: Microsoft.VSCode.Dsc/VSCodeExtension
-      id: VSCodeExtension - ms-dotnettools.vscodeintellicode-csharp
-      directives:
-        description: Install IntelliCode for C# extension
-        allowPrerelease: true
-      settings:
-        Name: ms-dotnettools.vscodeintellicode-csharp
-    - resource: Microsoft.VSCode.Dsc/VSCodeExtension
       id: VSCodeExtension - ms-kubernetes-tools.vscode-kubernetes-tools
       directives:
         description: Install Kubernetes extension
@@ -260,6 +253,13 @@ properties:
         allowPrerelease: true
       settings:
         Name: ritwickdey.LiveServer
+    - resource: Microsoft.VSCode.Dsc/VSCodeExtension
+      id: VSCodeExtension - tailscale.vscode-tailscale
+      directives:
+        description: Install tailscale extension
+        allowPrerelease: true
+      settings:
+        Name: tailscale.vscode-tailscale
     ### Install Docker Desktop
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage

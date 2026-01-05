@@ -55,3 +55,14 @@ properties:
       settings:
         id: WinDirStat.WinDirStat
         source: winget
+    ### Install Teams
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Teams
+      directives:
+        description: Install Microsoft Teams
+        allowPrerelease: true
+      settings:
+        id: Microsoft.Teams
+        source: winget        
+ 
