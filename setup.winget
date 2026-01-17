@@ -141,6 +141,27 @@ properties:
          Key: HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Edge\Extensions\jbkfoedolllekgbhcbcoahefnbanhhlh
          ValueName: update_url
          ValueData: https://edge.microsoft.com/extensionwebstorebase/v1/crx
+
+    ### Install Bitwarden CLI
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: BitwardenCLI
+      directives:
+        description: Install Bitwarden CLI
+        allowPrerelease: true
+      settings:
+        id: Bitwarden.cli
+
+    ### Install jq
+    ### -------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: jq
+      directives:
+        description: Install jq, a lightweight and flexible command-line JSON processor
+        allowPrerelease: true
+      settings:
+        id: jqlang.jq
+
     ### Install 7Zip
     ### -------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
